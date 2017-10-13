@@ -11,4 +11,4 @@ class Course(models.Model):
 	description = models.TextField()
 
 	def __str__(self):
-		return 'Title: ' + self.title + ' Description: ' + self.description
+		return self.title
