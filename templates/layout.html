@@ -5,7 +5,10 @@
 		<title>{% block title %}{% endblock %}</title>
 	</head>
 	<body>
-		<img src="{% static 'new.png' %}">
+		<nav>
+			<a href="{% url 'hello' %}">Home</a>
+			<a href="{% url 'courses:list' %}">Courses</a>
+		</nav>
 		{% block content %}{% endblock %}
 	</body>
 </html>
