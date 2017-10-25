@@ -46,3 +46,10 @@ class CourseViewsTests(TestCase):
 										kwargs = {'pk': self.course.pk}))
 		self.assertEqual(resp.status_code, 200)
 		self.assertEqual(self.course, resp.context['course'])
+
+	def test_step_detail(self):
+		resp = self.client.get(reverse('courses:step', kwargs = {
+						'course_pk': self.course.pk,
+						'step_pk': self.step.pk}))
+		self.assertEqual(resp.status_code, 200)
+		self.assertEqual(self.step, resp.context['step'])
