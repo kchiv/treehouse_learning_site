@@ -5,7 +5,7 @@ from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.utils import timezone
 
-from .models import Course
+from .models import Course, Step
 
 # Create your tests here.
 
@@ -20,7 +20,7 @@ class CourseModelTests(TestCase):
 
 
 class CourseViewsTests(TestCase):
-	def setup(self):
+	def setUp(self):
 		self.course = Course.objects.create(
 			title = 'Python Testing',
 			description = 'Learn to write tests in Python.'
