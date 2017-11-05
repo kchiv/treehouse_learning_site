@@ -9,7 +9,10 @@
 
 {% for course in courses %}
 <h2><a href="{% url 'courses:detail' pk=course.pk %}">{{course.title}}</a></h2>
-{{course.description}}
+
+	{% if course.description %}
+		<p>{{course.description}}</p>
+	{% endif %}
 {% endfor %}
 
 {% endblock %}
