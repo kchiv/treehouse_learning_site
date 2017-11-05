@@ -7,7 +7,7 @@
 	<h2>{{ course.title }}</h2>
 	{{ course.description }}
 
-	<p>These are {{ course.step_set.all|length }} steps in this course: {{ course.step_set.all|join:', ' }}</p>
+	<p>These are {{ course.step_set.all|count }} steps in this course: {{ course.step_set.all|join:', ' }}</p>
 
 	<section>
 		{% for step in course.step_set.all %}
