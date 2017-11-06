@@ -7,6 +7,7 @@
 		{% block static %}{% endblock %}
 	</head>
 	<body>
+		<div>{% nav_courses_list %}</div>
 		<nav>
 			<a href="{% url 'hello' %}">Home</a>
 			<a href="{% url 'courses:list' %}">Courses</a>
