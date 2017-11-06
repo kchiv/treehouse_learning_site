@@ -10,9 +10,14 @@
 {% for course in courses %}
 <h2><a href="{% url 'courses:detail' pk=course.pk %}">{{course.title}}</a></h2>
 
-	{% if course.description %}
+	{% if course.description|wordcount <= 5 %}
 		<p>{{course.description}}</p>
+	{% else %}
+		<p>{{ course.description|truncatewords:5 }}</p>
+		<a href="{% url 'courses:detail' pk=course.pk %}">Read More</a>
 	{% endif %}
+
+	<p>Created on: {{ course.created_at|date:"F j, Y" }}</p>
 {% endfor %}
 
 {% endblock %}
