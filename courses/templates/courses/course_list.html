@@ -20,4 +20,6 @@
 	<p>Created on: {{ course.created_at|date:"F j, Y" }}</p>
 {% endfor %}
 
+<p>Have questions? Contact us at {{ email|urlize }}</p>
+
 {% endblock %}
