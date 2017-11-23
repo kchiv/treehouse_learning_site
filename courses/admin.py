@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
-from .models import Course, Text
+from .models import Course, Text, Quiz
 
 # Register your models here.
 
@@ -14,4 +14,4 @@ class CourseAdmin(admin.ModelAdmin):
 
 admin.site.register(Course, CourseAdmin)
 admin.site.register(Text)
-
+admin.site.register(Quiz)
