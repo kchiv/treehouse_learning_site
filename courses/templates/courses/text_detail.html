@@ -9,22 +9,10 @@
 
 {% block content %}
     <div class="row columns">
-        {{ block.super }}
         <article>
-            <h1 class="">{{ course.title }}</h1>
-
-            <div class="callout secondary">
-                {{ course.description|markdown_to_html }}
-            </div>
-
-            <dl>
-                {% for step in steps %}
-                    <dt>
-                        <a href="{{ step.get_absolute_url }}">{{ step.title }}</a>
-                    </dt>
-                    <dd>{{ step.description|markdown_to_html }}</dd>
-                {% endfor %}
-            </dl>
+            {{ block.super }}
+            <h1>{{ step.title }}</h1>
+            {{ step.content|markdown_to_html }}
         </article>
     </div>
 {% endblock %}
