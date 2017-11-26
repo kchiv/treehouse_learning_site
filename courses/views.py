@@ -67,3 +67,6 @@ def quiz_edit(request, course_pk, quiz_pk):
 			return HttpResponseRedirect(quiz.get_absolute_url())
 
 	return render(request, 'courses/quiz_form.html', {'form': form, 'course': quiz.course})
+
+
+
