@@ -126,7 +126,6 @@ def answer_form(request, question_pk, answer_pk=None):
 				answer.question = question
 				answer.save()
 			messages.success(request, 'Add answers')
-			return HttpResponseRedirect(answer.question.quiz.get_absolute_url())
 
 	return render(request, 'courses/answer_form.html', {
 							'question': question,
