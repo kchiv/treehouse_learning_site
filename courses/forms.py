@@ -35,4 +35,4 @@ class AnswerForm(forms.ModelForm):
 			'correct'
 		]
 
-AnswerFormSet = forms.modelformset_factory(models.Answer, form = AnswerForm)
+AnswerFormSet = forms.modelformset_factory(models.Answer, form=AnswerForm)
