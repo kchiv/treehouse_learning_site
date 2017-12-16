@@ -160,3 +160,9 @@ def answer_form(request, question_pk, answer_pk=None):
 							'question': question,
 							'formset': formset
 		})
+
+
+def courses_by_teacher(request, teacher):
+	teacher = models.User.objects.get(username=teacher)
+	courses = teacher.course_set.all()
+	return render(request, 'courses/course_list.html', {'courses': courses})
