@@ -163,6 +163,5 @@ def answer_form(request, question_pk, answer_pk=None):
 
 
 def courses_by_teacher(request, teacher):
-	teacher = models.User.objects.get(username=teacher)
-	courses = teacher.course_set.all()
+	courses = models.Course.objects.filter(teacher__username=teacher)
 	return render(request, 'courses/course_list.html', {'courses': courses})
