@@ -165,3 +165,8 @@ def answer_form(request, question_pk, answer_pk=None):
 def courses_by_teacher(request, teacher):
 	courses = models.Course.objects.filter(teacher__username=teacher)
 	return render(request, 'courses/course_list.html', {'courses': courses})
+
+def search(request):
+	term = request.GET.get('q')
+	courses = models.Course.objects.filter(title__icontains=term)
+	return render(request, 'courses/course_list.html', {'courses': courses})
