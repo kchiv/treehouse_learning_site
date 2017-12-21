@@ -171,5 +171,5 @@ def courses_by_teacher(request, teacher):
 
 def search(request):
 	term = request.GET.get('q')
-	courses = models.Course.objects.filter(published=True).filter(Q(title__icontains=term)|Q(description__icontains=term))
+	courses = models.Course.objects.filter(Q(title__icontains=term)|Q(description__icontains=term), published=True)
 	return render(request, 'courses/course_list.html', {'courses': courses})
