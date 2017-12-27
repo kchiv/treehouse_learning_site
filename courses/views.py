@@ -6,7 +6,7 @@ from itertools import chain
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
-from django.db.models import Q
+from django.db.models import Q, Count, Sum
 
 from django.http import HttpResponseRedirect
 
@@ -19,9 +19,10 @@ from . import models
 
 
 def course_list(request):
-	courses = models.Course.objects.filter(published=True)
+	courses = models.Course.objects.filter(published=True).annotate(total_steps=Count('text', distinct=True)+Count('quiz', distinct=True))
+	total = courses.aggregate(total=Sum('total_steps'))
 	email = 'questions@learning-site.com'
-	return render(request, 'courses/course_list.html', {'courses':courses, 'email':email})
+	return render(request, 'courses/course_list.html', {'courses':courses, 'email':email, 'total': total})
 
 def course_detail(request, pk):
 	course = get_object_or_404(models.Course, pk=pk, published=True)
