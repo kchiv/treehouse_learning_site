@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 
 from django.db.models import Q, Count, Sum
 
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 
 from django.shortcuts import get_object_or_404, render
 
@@ -25,9 +25,14 @@ def course_list(request):
 	return render(request, 'courses/course_list.html', {'courses':courses, 'email':email, 'total': total})
 
 def course_detail(request, pk):
-	course = get_object_or_404(models.Course, pk=pk, published=True)
-	steps = sorted(chain(course.text_set.all(), course.quiz_set.all()),
-					key=lambda step: step.order)
+	try:
+		course = models.Course.objects.prefetch_related(
+			'quiz_set', 'text_set', 'quiz_set__question_set'
+		).get(pk=pk, published=True)
+	except models.Course.DoesNotExist:
+		raise Http404
+	else:
+		steps = sorted(chain(course.text_set.all(), course.quiz_set.all()), key=lambda step: step.order)
 	return render(request, 'courses/course_detail.html', {
 			'course': course,
 			'steps': steps
@@ -38,8 +43,12 @@ def text_detail(request, course_pk, step_pk):
 	return render(request, 'courses/text_detail.html', {'step':step})
 
 def quiz_detail(request, course_pk, step_pk):
-	step = get_object_or_404(models.Quiz, course_id=course_pk, pk=step_pk, course__published=True)
-	return render(request, 'courses/quiz_detail.html', {'step':step})
+	try:
+		step = models.Quiz.objects.select_related('course').prefetch_related('question_set', 'question_set__answer_set').get(course_id=course_pk, pk=step_pk, course__published=True)
+	except models.Quiz.DoesNotExist:
+		raise Http404
+	else:
+		return render(request, 'courses/quiz_detail.html', {'step':step})
 
 
 @login_required
