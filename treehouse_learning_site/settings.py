@@ -133,3 +133,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'suggestions')
 
 INTERNAL_IPS = ['127.0.0.1']
+
+#kyle.chivers
+#treehouse_learning_site
